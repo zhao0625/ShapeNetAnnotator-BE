@@ -9,21 +9,21 @@ var cmd = require('node-cmd');
 var DIR_LOCAL = "/Users/zlf/ForData/ShapeNet/ShapeNetCore.v2/",  // /[category id]/[model id]
     DIR = "/data/hier_seg_shapenet_parts/data/";  // /[category name]/[model id]
 // path prefix
-var PREFIX_LOCAL = "/models/model_normalized.obj",
-    PREFIX = "/normalized_obj/entire_shape.obj",
-    PREFIX_REMESH = "/normalized_obj/entire_shape_remesh.obj",
-    PREFIX_JSON = "/tree_hier.json";  // TODO which one?
+var SUFFIX_LOCAL = "/models/model_normalized.obj",  // TODO 改成suffix
+    SUFFIX = "/normalized_obj/entire_shape.obj",
+    SUFFIX_REMESH = "/normalized_obj/entire_shape_remesh.obj",
+    SUFFIX_JSON = "/tree_hier.json";  // TODO which one?
 // remeshing executable
 var REMESH_EXECUTABLE = 'model_fixer';
 
 // TODO GET request: /obj/[category id]-[model id]
 router.get('/obj/:category_id-:model_id-:remesh', function (req, res, next) {
     if (req.params.remesh === 'true') {
-        var remesh_path = DIR + req.params.category_id + '/' + req.params.model_id + PREFIX_REMESH;
+        var remesh_path = DIR + req.params.category_id + '/' + req.params.model_id + SUFFIX_REMESH;
         console.log(remesh_path);
 
         if (!fs.exists(remesh_path)) {
-            var original_path = DIR + req.params.category_id + '/' + req.params.model_id + PREFIX;
+            var original_path = DIR + req.params.category_id + '/' + req.params.model_id + SUFFIX;
             cmd.get(REMESH_EXECUTABLE + ' ' +
                 original_path + ' ' + remesh_path);  // TODO [resolution]
             console.log(original_path);
@@ -47,7 +47,7 @@ router.get('/obj/:category_id-:model_id-:remesh', function (req, res, next) {
 
 // TODO GET request: /json/[category id]-[model id]
 router.get('/json/:category_id-:model_id', function (req, res, next) {
-    var file_path = DIR + req.params.category_id + '/' + req.params.model_id + PREFIX_JSON;
+    var file_path = DIR + req.params.category_id + '/' + req.params.model_id + SUFFIX_JSON;
 
     // TODO http response
     res.download(file_path);

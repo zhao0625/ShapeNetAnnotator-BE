@@ -11,9 +11,9 @@ var THREE = require('three');
 // working directory
 var DIR = "/data/hier_seg_shapenet_parts/data/";  // /[category name]/[model id]
 // path prefix
-var PREFIX = "/normalized_obj/entire_shape.obj",
-    PREFIX_REMESH = "/normalized_obj/entire_shape_remesh.obj",
-    PREFIX_JSON = "/tree_hier.json";  // TODO which one?
+var SUFFIX = "/normalized_obj/entire_shape.obj",
+    SUFFIX_REMESH = "/normalized_obj/entire_shape_remesh.obj",
+    SUFFIX_JSON = "/tree_hier.json";  // TODO which one?
 // remeshing executable
 var REMESH_EXECUTABLE = 'model_fixer';
 

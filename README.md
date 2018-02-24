@@ -2,6 +2,7 @@
 The project is being actively developing.
 
 # Run
+Run with `./bin/www`.
 The server listens to port `3000`.
 
 ## Functions (APIs)
